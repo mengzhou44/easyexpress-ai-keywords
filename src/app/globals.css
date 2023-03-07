@@ -51,6 +51,7 @@ Global Styles
 html {
   scroll-behavior: smooth;
 }
+
 *,
 ::after,
 ::before {
@@ -67,23 +68,33 @@ body {
   font-size: 0.875rem;
 }
 
-input, select, textarea, button{font-family:inherit;}
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
 
 h1 {
   font-size: 4rem;
 }
+
 h2 {
   font-size: 2.2rem;
 }
+
 h3 {
   font-size: 1.75rem;
 }
+
 h4 {
   font-size: 1.25rem;
 }
+
 body {
   font-size: 1rem;
 }
+
 h1,
 h2,
 h3,
@@ -107,21 +118,25 @@ h4 {
     font-size: 3rem;
     letter-spacing: var(--spacing);
   }
+
   h2 {
     font-size: 2rem;
     letter-spacing: var(--spacing);
   }
+
   h3 {
     font-size: 1.5rem;
     letter-spacing: var(--spacing);
   }
+
   h4 {
     font-size: 1.25rem;
   }
+
   p {
     margin-bottom: 1rem;
     color: var(--clr-grey-5);
-  } 
+  }
 }
 
 a {
@@ -129,8 +144,8 @@ a {
 }
 
 /*  global classes */
- 
- 
+
+
 
 .container h1 {
   color: var(--clr-white);
@@ -157,31 +172,38 @@ main {
   display: grid;
   place-items: center;
 }
- 
-.title {
-	margin-bottom: 2rem; 
-  }
-  
-  .title h2 {
-	text-transform: uppercase;
-	color: var(--clr-white-smoke);
-	font-size: 1.8rem;
-	text-align: center;
-	word-spacing: 0.2rem;
-	letter-spacing: .1rem;
-	font-weight: 400;
-  }
-  
-  .title h2:after {
-	display: block;
-	height: 0.2rem;
-	background-color: var(--clr-red);
-	content: ' ';
-	width: 10rem;
-	margin: 0 auto;
-	margin-top: 2rem;
-  }
 
-  __next-auth-theme-auto {
-     background-color: var(--clr-blue-light);
-  }
+.title {
+  margin-bottom: 2rem;
+}
+
+.title h2 {
+  text-transform: uppercase;
+  color: var(--clr-white-smoke);
+  font-size: 1.8rem;
+  text-align: center;
+  word-spacing: 0.2rem;
+  letter-spacing: .1rem;
+  font-weight: 400;
+}
+
+.title h2:after {
+  display: block;
+  height: 0.2rem;
+  background-color: var(--clr-red);
+  content: ' ';
+  width: 10rem;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+__next-auth-theme-auto {
+  background-color: var(--clr-blue-light);
+}
+
+.Toastify__toast--warning {
+  background: #FFE8BC !important;
+}
+.Toastify__toast--error {
+  background: #FCA7A9 !important;
+}

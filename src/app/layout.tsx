@@ -1,8 +1,10 @@
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css';
 import { Inter } from '@next/font/google'
 import Header from './header'
 import Footer from './footer'
 import styles from './layout.module.css'
+
 
 const inter = Inter({
   weight: "400",
@@ -26,6 +28,7 @@ export default function RootLayout({
           <section className={styles.content}>
             <Header></Header>
             {children}
+          
           </section>
           <Footer />
         </div>

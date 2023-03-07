@@ -37,7 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       const image_url = response.data.data[0].url;
-
+    
       res.send({
         data: image_url
       })
