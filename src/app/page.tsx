@@ -58,9 +58,12 @@ const PageHeader = () => {
   return (
     <>
       <Image src='/static/light-bulb.svg' alt='logo' height={30} width={50} />
-      <Text fontSize={20} textAlign='center'>
-        Paste in your text below and we'll extract the keywords for you.
-      </Text>
+      <Text 
+         fontSize={20} 
+         textAlign='center'
+         dangerouslySetInnerHTML={{ __html:"Paste in your text below and we'll extract the keywords for you." }}
+        />
+    
       <TextInput extractKeyWords={extractKeyWords} />
       <KeywordsModal
         keywords={keywords}
