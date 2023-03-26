@@ -1,6 +1,7 @@
 import styles from './header.module.css';
 import Image from 'next/image';
 import Link from 'next/link'
+ 
 
 const Header = () => {
 
@@ -25,10 +26,10 @@ const Header = () => {
       <div className={styles.container}>
         <div className={styles['nav-content']}>
           {renderLogo()}
-          <h3 className={styles.title}>OpenAI Image</h3>
+          <h3 className={styles.title}>Open AI</h3>
         </div>
       </div>
-    
+     
     </nav>
   );
 };

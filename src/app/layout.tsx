@@ -1,3 +1,8 @@
+'use client'
+
+import { CacheProvider } from '@chakra-ui/next-js'
+import { ChakraProvider } from '@chakra-ui/react'
+
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { Inter } from '@next/font/google'
@@ -11,11 +16,7 @@ const inter = Inter({
   subsets: ['latin']
 })
 
-export const metadata = {
-  title: 'OpenAI create image',
-  description: 'Create Image',
-}
-
+ 
 export default function RootLayout({
   children,
 }: {
@@ -27,8 +28,11 @@ export default function RootLayout({
         <div className={styles.layout}>
           <section className={styles.content}>
             <Header></Header>
-            {children}
-          
+            <section className={styles.children}>
+            <CacheProvider>
+              <ChakraProvider>{children}</ChakraProvider>
+            </CacheProvider>
+            </section>
           </section>
           <Footer />
         </div>

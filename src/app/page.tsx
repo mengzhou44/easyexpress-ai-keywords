@@ -1,74 +1,76 @@
 "use client";
-import styles from './page.module.css'
+import { Container, Box } from "@chakra-ui/react";
+import { Text } from '@chakra-ui/react';
+import Image from "next/image";
+import TextInput from "./text-input";
 import { useState } from 'react'
-import { toast, ToastContainer } from 'react-toastify'
-
+import KeywordsModal from "./keywords-modal";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Home() {
 
-  const [prompt, setPrompt] = useState('')
-  const [imageSize, setImageSize] = useState('')
-  const [imageUrl, setImageUrl] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  async function onSubmit(e: any) {
-    e.preventDefault();
-    setImageUrl('')
-    if (prompt === '' || imageSize === '') {
-      toast('Prompt and Image size is required')
-    }
-    try {
-      setLoading(true)
-      const res = await fetch('/api/openai/generateimage', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          prompt,
-          imageSize
-        })
-      })
-      let { data,error } = await res.json()
-
-       if (error) {
-        toast.warn(error)
-       } else {
-        setImageUrl(data)
-       }
-
-    } catch (err: any) {
-      toast.warn(err.message)
-    }
-     
-    setLoading(false)
-  }
-
   return (
-    <main className={styles.main}>
-      <form onSubmit={onSubmit} className={styles.form}>
-        <input className={styles.prompt} type='text' onChange={e => setPrompt(e.target.value)} value={prompt} placeholder='Please tell us what image to create '></input>
-
-        <select  className={styles.imageSize} onChange={e => setImageSize(e.target.value)} value={imageSize}>
-          <option value="">Select Image Size ---  </option>
-          <option value='small'>Small</option>
-          <option value='medium'> Medium</option>
-          <option value='large'>Large</option>
-        </select>
-
-        <input className={styles.submit} type='submit' value='Create Image' />
-
-        {loading && <p className={styles.center}> Generating Image ... </p>}  
-        {imageUrl&& 
-        <div className={styles.center}>
-          <img src={imageUrl} alt='image'></img>
-          </div>}
-        
-      </form>
-      <ToastContainer 
-         progressClassName={styles.toastProgress}
-         bodyClassName={styles.toastBody}
-      />
-    </main>
+    <Box bg='blue.600' color='white' height='100vh' paddingTop={130}>
+      <Container maxW='3xl' centerContent>
+        <PageHeader />
+      </Container>
+    </Box>
   )
 }
+
+const PageHeader = () => {
+  const [keywords, setKeywords] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
+  async function extractKeyWords(text: string) {
+    setLoading(true);
+    setIsOpen(true);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt:
+          'Extract keywords from this text. Make the first letter of every word uppercase and separate with commas:\n\n' +
+          text +
+          '',
+      }),
+    }
+
+    try {
+      const res = await fetch('/api/openai/extract-keywords', options)
+      const json = await res.json();
+
+      if (json.success === false) {
+        toast.error('Error occured!')
+      } else {
+        setKeywords(json.data);
+      }
+      setLoading(false);
+    } catch (err) {
+      toast.error('Error occured!')
+    }
+
+  }
+  return (
+    <>
+      <Image src='/static/light-bulb.svg' alt='logo' height={30} width={50} />
+      <Text fontSize={20} textAlign='center'>
+        Paste in your text below and we'll extract the keywords for you.
+      </Text>
+      <TextInput extractKeyWords={extractKeyWords} />
+      <KeywordsModal
+        keywords={keywords}
+        loading={loading}
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+      />
+      <ToastContainer />
+    </>
+  );
+};
+
+
