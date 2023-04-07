@@ -1,5 +1,6 @@
 import { Configuration, OpenAIApi } from "openai";
-import type { NextApiRequest, NextApiResponse } from 'next';
+//import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -11,12 +12,12 @@ type RequestBody = {
    prompt: string
 };
 
-export  async function  POST(req: NextApiRequest, res: NextApiResponse) {
-
+export  async function  POST(req: any, res: NextResponse) {
     try {
-      const { body } = req;
+      const body = await req.json()
+      
       const { prompt } = body as RequestBody;
- 
+       
       const response = await openai.createCompletion({
         model: 'text-davinci-003',
         prompt, 
@@ -26,14 +27,12 @@ export  async function  POST(req: NextApiRequest, res: NextApiResponse) {
         frequency_penalty: 0.8,
         presence_penalty: 0.0,
       });
-      res.send({
+
+      return NextResponse.json({
         data: response.data.choices[0].text
       })
+
     } catch (error: any) {
-       console.log({error})      
-      res.status(400).json({
-        success: false,
-        error: 'Error extracting keywords...',
-      });
+        return NextResponse.error()
     }
 }
