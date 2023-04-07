@@ -1,13 +1,12 @@
-'use client'
-
+'use client';
 import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
 
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { Inter } from '@next/font/google'
-import Header from './header'
-import Footer from './footer'
+import Header from '../components/header'
+import Footer from '../components/footer'
 import styles from './layout.module.css'
 
 

@@ -11,9 +11,8 @@ type RequestBody = {
    prompt: string
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export  async function  POST(req: NextApiRequest, res: NextApiResponse) {
 
-  if (req.method === 'POST') {
     try {
       const { body } = req;
       const { prompt } = body as RequestBody;
@@ -37,7 +36,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         error: 'Error extracting keywords...',
       });
     }
-  } else {
-    res.status(405).json({ message: 'Method Not Allowed!' });
-  }
 }

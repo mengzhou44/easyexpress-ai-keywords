@@ -7,7 +7,7 @@ const Header = () => {
 
   function renderLogo() {
     return (
-      <Link href={`/`}>
+      <Link href={`https://easyexpresssoft.com`}>
         <div
           className={styles.logo}
         >

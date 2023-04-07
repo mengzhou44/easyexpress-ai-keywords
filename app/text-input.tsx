@@ -5,7 +5,7 @@ import { useToast } from '@chakra-ui/react';
 
 export type ExtractKeyWords = (val: string) =>  any
 
-interface Props {
+type  Props =  {
     extractKeyWords: ExtractKeyWords;  
 }
 

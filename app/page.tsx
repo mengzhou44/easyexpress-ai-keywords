@@ -4,7 +4,7 @@ import { Text } from '@chakra-ui/react';
 import Image from "next/image";
 import TextInput from "./text-input";
 import { useState } from 'react'
-import KeywordsModal from "./keywords-modal";
+import KeywordsModal from "../components/keywords-modal";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Home() {
